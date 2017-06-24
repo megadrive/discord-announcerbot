@@ -69,7 +69,8 @@ function outputYoutubeDataToDiscordChannel (videoData) {
 }
 
 function parseTwitchInfo () {
-  let twitchUrl = `https://api.twitch.tv/kraken/streams?stream_type=live&limit=100&channel=${conf.twitch.channels.join(',')}`
+  let freshConfig = jsonfile.readFileSync('./config.json')
+  let twitchUrl = `https://api.twitch.tv/kraken/streams?stream_type=live&limit=100&channel=${freshConfig.twitch.channels.join(',')}`
   return new Promise(function (resolve, reject) {
     let opts = {
       'headers': {
