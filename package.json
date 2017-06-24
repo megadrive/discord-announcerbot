@@ -1,0 +1,16 @@
+{
+  "name": "announcerbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Megadrive <a.simeon@gmail.com> (http://megadriven.net/)",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.1.0",
+    "got": "^7.0.0",
+    "jsonfile": "^3.0.0"
+  }
+}

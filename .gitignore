@@ -1,0 +1,8 @@
+!*.json.example
+!package.json
+!package-lock.json
+!db/.gitignore
+
+node_modules/
+db/
+config.json

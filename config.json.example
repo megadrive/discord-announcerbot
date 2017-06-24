@@ -1,0 +1,20 @@
+{
+  "channels_to_parse": [
+    ["key1", "youtube user id to check"]
+    ["key2", "another youtube user id to check"]
+  ],
+  "twitch": {
+    "datafile": "db/twitch.json",
+    "clientid": "",
+    "channels": ["your", "list", "here"]
+  },
+  "discord": {
+    "key": "your discord key here, bot or user key supported",
+    "announceChannel": "enable developer mode in settings -> appearance, the rightclick on channel name -> copy id"
+  },
+  "youtube": {
+    "datafile": "db/youtube.json",
+    "parseWaitTime": 10000,
+    "key": "your google api key with YouTube Data API enabled"
+  }
+}
