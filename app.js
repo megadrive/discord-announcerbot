@@ -23,16 +23,15 @@ function parseChannelInfo (channelId) {
     got(youtubeUrl.replace(/{channelId}/g, channelId), {json: true})
       .then(function (channelData) {
         let oldData = jsonfile.readFileSync(conf.youtube.datafile, {throws: false})
+        if (!oldData || !oldData.items) oldData = {items: []}
 
         let diff = []
-        if (oldData && oldData.items) {
-          diff = channelData.body.items.filter(function (item) {
-            for (let i = 0; i < oldData.items.length; i++) {
-              if (oldData.items[i].contentDetails.upload.videoId === item.contentDetails.upload.videoId) return false
-            }
-            return true
-          })
-        }
+        diff = channelData.body.items.filter(function (item) {
+          for (let i = 0; i < oldData.items.length; i++) {
+            if (oldData.items[i].contentDetails.upload.videoId === item.contentDetails.upload.videoId) return false
+          }
+          return true
+        })
 
         // Update our data set
         jsonfile.writeFile(conf.youtube.datafile, channelData.body, {}, function (err) {
@@ -110,7 +109,7 @@ function parseTwitchInfo () {
           if (err) console.error(err)
         })
 
-        if (wasOnNowOff.length && wasOffNowOn.length) {
+        if (wasOnNowOff.length || wasOffNowOn.length) {
           resolve({
             'wasOnNowOff': wasOnNowOff,
             'wasOffNowOn': wasOffNowOn
@@ -134,7 +133,7 @@ function outputTwitchDataToDiscordChannel (data) {
       let name = channel.channel.display_name
       let game = channel.game
 
-      say += `${name} just went live playing ${game}! Go check it out at https://twitch.tv/${username}`
+      say += `${name} just went live playing ${game}! Go check it out at https://twitch.tv/${username}\n`
     })
 
     // Get the channel object
