@@ -11,6 +11,7 @@
   "dependencies": {
     "discord.js": "^11.1.0",
     "got": "^7.0.0",
+    "humanize": "0.0.9",
     "jsonfile": "^3.0.0"
   }
 }
