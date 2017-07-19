@@ -170,7 +170,10 @@ function outputTwitchDataToDiscordChannel (data) {
   let say = ''
 
   if (data.wasOffNowOn.length) {
-    data.wasOffNowOn.forEach(function (channel) {
+    // remove duplicates
+    let uniq = uniqueArrayObjects(data.wasOffNowOn, '_id')
+
+    uniq.forEach(function (channel) {
       let username = channel.channel.name
       let name = channel.channel.display_name
       let game = channel.game
@@ -250,3 +253,18 @@ bot.on('message', function (message) {
     }
   }
 })
+
+/**
+ * @param {array<Object>} arrayOfObjects
+ * @param {string} keyToTest the key to keep unique
+ */
+function uniqueArrayObjects (arrayOfObjects, keyToTest) {
+  if (!keyToTest) return arrayOfObjects
+
+  let seen = {}
+  let uniq = arrayOfObjects.filter(obj => {
+    return seen.hasOwnProperty(obj[keyToTest]) ? false : (seen[obj[keyToTest]] = true)
+  })
+
+  return uniq
+}
